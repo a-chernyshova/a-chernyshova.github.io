@@ -5,18 +5,294 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Page</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: sans-serif;
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 0 20px;
-      color: #333;
+      font-family: system-ui, sans-serif;
+      color: #1a1a2e;
+      background: #f5f5f5;
     }
-    h1 { color: #2c7be5; }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 9999;
+      border-radius: 0 2px 2px 0;
+      background: linear-gradient(
+        90deg,
+        #e94560,
+        #f5a623,
+        #f8e71c,
+        #7ed321,
+        #4a90e2,
+        #9b59b6
+      );
+      background-size: 200% 100%;
+      animation: shimmer 2s linear infinite;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(233, 69, 96, 0.7),
+                  0 0 20px rgba(233, 69, 96, 0.4);
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: 0%   center; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #1a1a2e;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo { font-size: 1.3rem; font-weight: 700; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul a { color: white; text-decoration: none; opacity: 0.8; }
+    nav ul a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p  { font-size: 1.2rem; opacity: 0.85; margin-bottom: 2rem; }
+    .btn {
+      display: inline-block;
+      background: #e94560;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    /* ── SECTION WRAPPER ── */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      background: white;
+      padding: 4rem 2rem;
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features-inner h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .feature-item {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-radius: 12px;
+      background: #f0f4ff;
+      transition: transform 0.2s;
+    }
+    .feature-item:hover { transform: translateY(-4px); }
+    .feature-item .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .feature-item h3   { margin-bottom: 0.5rem; }
+    .feature-item p    { font-size: 0.9rem; color: #555; }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .card-body { padding: 1.2rem; }
+    .card-body h3 { margin-bottom: 0.4rem; }
+    .card-body p  { font-size: 0.9rem; color: #666; }
+    .tag {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #e8f0fe;
+      color: #1a73e8;
+    }
+
+    /* ── LONG TEXT BLOCK (more scroll room) ── */
+    .text-block {
+      background: white;
+      padding: 4rem 2rem;
+    }
+    .text-block-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .text-block-inner h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+    .text-block-inner p  { line-height: 1.8; color: #444; margin-bottom: 1.2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a { color: #e94560; text-decoration: none; }
   </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>Welcome to my GitHub Pages site.</p>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">⚡ MySite</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Build Something Great</h1>
+    <p>A clean starting point for your next web project.</p>
+    <a href="#" class="btn">Get Started →</a>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="features-inner">
+      <h2>Why Choose Us</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="icon">🚀</div>
+          <h3>Fast</h3>
+          <p>Optimised from the ground up for speed and performance.</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">🎨</div>
+          <h3>Beautiful</h3>
+          <p>Clean design that looks great on every screen size.</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">🔒</div>
+          <h3>Secure</h3>
+          <p>Best practices baked in so your users stay safe.</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">📱</div>
+          <h3>Responsive</h3>
+          <p>Works perfectly on desktop, tablet, and mobile.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <section>
+    <h2>Latest Posts</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-thumb" style="background:#fde8f0;">🌸</div>
+        <div class="card-body">
+          <h3>Getting Started</h3>
+          <p>Everything you need to know to launch your first project quickly and confidently.</p>
+          <span class="tag">Beginner</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb" style="background:#e8f4fd;">🌊</div>
+        <div class="card-body">
+          <h3>Advanced Layouts</h3>
+          <p>Deep dive into CSS Grid and Flexbox to build complex, responsive layouts.</p>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb" style="background:#e8fdf0;">🌿</div>
+        <div class="card-body">
+          <h3>Deploying to GitHub Pages</h3>
+          <p>Step-by-step walkthrough to get your static site live in minutes.</p>
+          <span class="tag">DevOps</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LONG TEXT BLOCK -->
+  <div class="text-block">
+    <div class="text-block-inner">
+      <h2>About This Project</h2>
+      <p>This template is designed to give you a solid, production-ready foundation without any build tools or dependencies. Everything lives in a single HTML file — just open it in a browser and you're good to go.</p>
+      <p>The scroll progress bar at the top tracks how far through the page you've read. It uses a rainbow gradient with a moving shimmer effect and a soft glow, all driven by a tiny JavaScript snippet and pure CSS animations — no libraries needed.</p>
+      <p>Responsive layout is handled entirely with CSS Grid's <code>auto-fit</code> and <code>minmax()</code>, so blocks reflow naturally on any screen size without a single media query breakpoint to maintain.</p>
+      <p>Hover effects on cards and feature tiles use <code>transform: translateY</code> with a smooth transition, giving the page a polished, interactive feel. The sticky navigation stays in view as you scroll, while the progress bar sits above everything at <code>z-index: 9999</code>.</p>
+      <p>Feel free to strip out sections you don't need, swap in your own colours, or expand the card grid with real content. The structure is intentionally flat — no nested frameworks to fight against.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 MySite · Made with ❤️ · <a href="#">Privacy</a> · <a href="#">Imprint</a></p>
+  </footer>
+
+  <!-- SCROLL PROGRESS SCRIPT -->
+  <script>
+    const bar = document.getElementById('progress-bar');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop    = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress     = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width    = progress + '%';
+    }, { passive: true });
+  </script>
+
 </body>
 </html>
