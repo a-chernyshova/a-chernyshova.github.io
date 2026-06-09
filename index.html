@@ -5,18 +5,225 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Page</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: sans-serif;
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 0 20px;
-      color: #333;
+      font-family: system-ui, sans-serif;
+      color: #1a1a2e;
+      background: #f5f5f5;
     }
-    h1 { color: #2c7be5; }
+
+    /* NAV */
+    nav {
+      background: #1a1a2e;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo { font-size: 1.3rem; font-weight: 700; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul a { color: white; text-decoration: none; opacity: 0.8; }
+    nav ul a:hover { opacity: 1; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p  { font-size: 1.2rem; opacity: 0.85; margin-bottom: 2rem; }
+    .btn {
+      display: inline-block;
+      background: #e94560;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    /* SECTION WRAPPER */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* FEATURE STRIP */
+    .features {
+      background: white;
+      padding: 4rem 2rem;
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features-inner h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .feature-item {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-radius: 12px;
+      background: #f0f4ff;
+    }
+    .feature-item .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .feature-item h3   { margin-bottom: 0.5rem; }
+    .feature-item p    { font-size: 0.9rem; color: #555; }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .card-body { padding: 1.2rem; }
+    .card-body h3 { margin-bottom: 0.4rem; }
+    .card-body p  { font-size: 0.9rem; color: #666; }
+    .tag {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #e8f0fe;
+      color: #1a73e8;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a { color: #e94560; text-decoration: none; }
   </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>Welcome to my GitHub Pages site.</p>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">⚡ MySite</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Build Something Great</h1>
+    <p>A clean starting point for your next web project.</p>
+    <a href="#" class="btn">Get Started →</a>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="features-inner">
+      <h2>Why Choose Us</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="icon">🚀</div>
+          <h3>Fast</h3>
+          <p>Optimised from the ground up for speed and performance.</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">🎨</div>
+          <h3>Beautiful</h3>
+          <p>Clean design that looks great on every screen size.</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">🔒</div>
+          <h3>Secure</h3>
+          <p>Best practices baked in so your users stay safe.</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">📱</div>
+          <h3>Responsive</h3>
+          <p>Works perfectly on desktop, tablet, and mobile.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <section>
+    <h2>Latest Posts</h2>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-thumb" style="background:#fde8f0;">🌸</div>
+        <div class="card-body">
+          <h3>Getting Started</h3>
+          <p>Everything you need to know to launch your first project quickly and confidently.</p>
+          <span class="tag">Beginner</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-thumb" style="background:#e8f4fd;">🌊</div>
+        <div class="card-body">
+          <h3>Advanced Layouts</h3>
+          <p>Deep dive into CSS Grid and Flexbox to build complex, responsive layouts.</p>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-thumb" style="background:#e8fdf0;">🌿</div>
+        <div class="card-body">
+          <h3>Deploying to GitHub Pages</h3>
+          <p>Step-by-step walkthrough to get your static site live in minutes.</p>
+          <span class="tag">DevOps</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Nassy · Made with ❤️ · <a href="#">Privacy</a> · <a href="#">Imprint</a></p>
+  </footer>
+
 </body>
 </html>
+
