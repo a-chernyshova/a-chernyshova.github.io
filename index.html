@@ -13,8 +13,41 @@
       background: #f5f5f5;
     }
 
-    /* NAV */
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 9999;
+      border-radius: 0 2px 2px 0;
+      background: linear-gradient(
+        90deg,
+        #e94560,
+        #f5a623,
+        #f8e71c,
+        #7ed321,
+        #4a90e2,
+        #9b59b6
+      );
+      background-size: 200% 100%;
+      animation: shimmer 2s linear infinite;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(233, 69, 96, 0.7),
+                  0 0 20px rgba(233, 69, 96, 0.4);
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: 0%   center; }
+    }
+
+    /* ── NAV ── */
     nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       background: #1a1a2e;
       color: white;
       padding: 1rem 2rem;
@@ -27,7 +60,7 @@
     nav ul a { color: white; text-decoration: none; opacity: 0.8; }
     nav ul a:hover { opacity: 1; }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
       background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
       color: white;
@@ -48,7 +81,7 @@
     }
     .btn:hover { transform: scale(1.05); }
 
-    /* SECTION WRAPPER */
+    /* ── SECTION WRAPPER ── */
     section {
       padding: 4rem 2rem;
       max-width: 1100px;
@@ -60,7 +93,7 @@
       text-align: center;
     }
 
-    /* FEATURE STRIP */
+    /* ── FEATURES ── */
     .features {
       background: white;
       padding: 4rem 2rem;
@@ -84,12 +117,14 @@
       padding: 2rem 1rem;
       border-radius: 12px;
       background: #f0f4ff;
+      transition: transform 0.2s;
     }
+    .feature-item:hover { transform: translateY(-4px); }
     .feature-item .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
     .feature-item h3   { margin-bottom: 0.5rem; }
     .feature-item p    { font-size: 0.9rem; color: #555; }
 
-    /* CARDS */
+    /* ── CARDS ── */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -124,7 +159,19 @@
       color: #1a73e8;
     }
 
-    /* FOOTER */
+    /* ── LONG TEXT BLOCK (more scroll room) ── */
+    .text-block {
+      background: white;
+      padding: 4rem 2rem;
+    }
+    .text-block-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .text-block-inner h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+    .text-block-inner p  { line-height: 1.8; color: #444; margin-bottom: 1.2rem; }
+
+    /* ── FOOTER ── */
     footer {
       background: #1a1a2e;
       color: #aaa;
@@ -136,6 +183,9 @@
   </style>
 </head>
 <body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar"></div>
 
   <!-- NAV -->
   <nav>
@@ -188,7 +238,6 @@
   <section>
     <h2>Latest Posts</h2>
     <div class="card-grid">
-
       <div class="card">
         <div class="card-thumb" style="background:#fde8f0;">🌸</div>
         <div class="card-body">
@@ -197,7 +246,6 @@
           <span class="tag">Beginner</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-thumb" style="background:#e8f4fd;">🌊</div>
         <div class="card-body">
@@ -206,7 +254,6 @@
           <span class="tag">CSS</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-thumb" style="background:#e8fdf0;">🌿</div>
         <div class="card-body">
@@ -215,15 +262,37 @@
           <span class="tag">DevOps</span>
         </div>
       </div>
-
     </div>
   </section>
 
+  <!-- LONG TEXT BLOCK -->
+  <div class="text-block">
+    <div class="text-block-inner">
+      <h2>About This Project</h2>
+      <p>This template is designed to give you a solid, production-ready foundation without any build tools or dependencies. Everything lives in a single HTML file — just open it in a browser and you're good to go.</p>
+      <p>The scroll progress bar at the top tracks how far through the page you've read. It uses a rainbow gradient with a moving shimmer effect and a soft glow, all driven by a tiny JavaScript snippet and pure CSS animations — no libraries needed.</p>
+      <p>Responsive layout is handled entirely with CSS Grid's <code>auto-fit</code> and <code>minmax()</code>, so blocks reflow naturally on any screen size without a single media query breakpoint to maintain.</p>
+      <p>Hover effects on cards and feature tiles use <code>transform: translateY</code> with a smooth transition, giving the page a polished, interactive feel. The sticky navigation stays in view as you scroll, while the progress bar sits above everything at <code>z-index: 9999</code>.</p>
+      <p>Feel free to strip out sections you don't need, swap in your own colours, or expand the card grid with real content. The structure is intentionally flat — no nested frameworks to fight against.</p>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 Nassy · Made with ❤️ · <a href="#">Privacy</a> · <a href="#">Imprint</a></p>
+    <p>© 2026 MySite · Made with ❤️ · <a href="#">Privacy</a> · <a href="#">Imprint</a></p>
   </footer>
+
+  <!-- SCROLL PROGRESS SCRIPT -->
+  <script>
+    const bar = document.getElementById('progress-bar');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop    = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress     = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width    = progress + '%';
+    }, { passive: true });
+  </script>
 
 </body>
 </html>
-
